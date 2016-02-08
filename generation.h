@@ -5,8 +5,8 @@ template<typename T>
 void generate(std::vector<T> &arr, unsigned long long len, T min_val, T max_val, int repetitions_percent = 0) {
 	arr.clear();
 	arr.resize(len);
-	for (int i = 0; i < len; i++)
-		arr[i] = rand() % max_val+min_val;
+	for (int i = 1; i < len; i++)
+		arr[i] = arr[i - 1] + (rand() % 100 + 1 > repetitions_percent ? 1 : 0) % (max_val - min_val) + min_val;
 }
 
 // order_percent [0, 100] - степень упорядоченности, 0 - массив упорядочен по возрастанию
