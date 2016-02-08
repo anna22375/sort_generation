@@ -7,8 +7,10 @@ void generate(std::vector<T> &arr, unsigned long long len, T min_val, T max_val,
 	arr.resize(len);
 	for (int i = 1; i < len; i++) //генерация чисел на отрезке [0; (100 - repetitions_percent) / 100.0 * len]
 		arr[i] = (arr[i - 1] + (rand() % 100 + 1 > repetitions_percent ? 1 : 0));
-	for (int i = 0; i < len; i++) //отображение чисел на отрезок [min_val; max_val]
-		arr[i] *= ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val;
+	for (int i = 0; i < len; i++) //отображение чисел на отрезок [0; max_val]
+		arr[i] *= ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len));
+	for (int i = 0; i < len; i++) //сдвиг нижней границы
+		arr[i] += min_val;
 }
 
 // order_percent [0, 100] - степень упорядоченности, 0 - массив упорядочен по возрастанию
