@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 
 template<typename T>
 void sort(std::vector<T> &arr) {
@@ -9,9 +10,6 @@ void sort(std::vector<T> &arr) {
 				position_min = j;
 			}
 		}
-		T temp;
-		temp = arr[i];
-		arr[i] = arr[position_min];
-		arr[position_min] = temp;
+		std::swap(arr[i], arr[position_min]);
 	}
 }
