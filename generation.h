@@ -8,7 +8,7 @@ void generate(std::vector<T> &arr, unsigned long long len, T min_val, T max_val,
 	arr.resize(len);
 	for (int i = 1; i < len; i++) //генерация чисел на отрезке [0; (100 - repetitions_percent) / 100.0 * len]
 		arr[i] = (arr[i - 1] + (std::rand() % 100 + 1 > repetitions_percent ? 1 : 0));
-		arr[len - 1] = arr[len - 1] * ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val; // отображение на отрезок 
+		arr[i - 1] = arr[i - 1] * ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val; // отображение на отрезок 
 	}
 	arr[len - 1] = arr[len - 1] * ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val;
 }
