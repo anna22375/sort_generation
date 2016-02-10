@@ -1,4 +1,5 @@
 #include <vector>
+#include <cstdlib>
 
 // repetitions_percent [0, 100] - процент повторений, 0 - все элементы различны
 template<typename T>
@@ -6,11 +7,10 @@ void generate(std::vector<T> &arr, unsigned long long len, T min_val, T max_val,
 	arr.clear();
 	arr.resize(len);
 	for (int i = 1; i < len; i++) //генерация чисел на отрезке [0; (100 - repetitions_percent) / 100.0 * len]
-		arr[i] = (arr[i - 1] + (rand() % 100 + 1 > repetitions_percent ? 1 : 0));
-	for (int i = 0; i < len; i++) //отображение чисел на отрезок [0; max_val]
-		arr[i] *= ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len));
-	for (int i = 0; i < len; i++) //сдвиг нижней границы
-		arr[i] += min_val;
+		arr[i] = (arr[i - 1] + (std::rand() % 100 + 1 > repetitions_percent ? 1 : 0));
+		arr[len - 1] = arr[len - 1] * ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val; // отображение на отрезок 
+	}
+	arr[len - 1] = arr[len - 1] * ((max_val - min_val) / ((100 - repetitions_percent) / 100.0 * len)) + min_val;
 }
 
 // order_percent [0, 100] - степень упорядоченности, 0 - массив упорядочен по возрастанию
