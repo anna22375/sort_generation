@@ -4,6 +4,6 @@
 
 int main() {
 	std::vector<int> arr;
-	random_generate(arr, 10, 0, 10, 50, 80);
+	random_generate(arr, 10000, 0, 10000, 20, 80);
 	sort(arr);
 }
