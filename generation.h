@@ -46,6 +46,27 @@ void regular_generate(std::vector<T> &arr, size_t len, T min_val, T max_val, int
 // Генерация последовательности (чередование регулярных участков)
 template<typename T>
 void alternation_generate(std::vector<T> &arr, size_t len, T min_val, T max_val) {
+        arr.clear();
+	arr.resize(len+1);
+	size_t the_number_of_parts = 1 + rand() % (len / 10);
+	size_t amount_of_numbers = len;
+	for (size_t i = 1; i <= len; i++)
+	{ 
+
+		T first_val = min_val;
+		if (the_number_of_parts != 1) 
+			amount_of_numbers = 1 + rand() % (amount_of_numbers - the_number_of_parts);
+		size_t k = i;
+		for (size_t j = i; j <k+amount_of_numbers; j++)
+		{
+			arr[j] = first_val + rand() % (max_val - first_val + 1);
+			first_val = arr[j];
+			i++;
+		}
+		i--;
+		the_number_of_parts--;
+		amount_of_numbers = len - i;
+	}
 }
 
 // Генерация последовательности (смесь регулярных участков)
