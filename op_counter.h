@@ -28,6 +28,21 @@ public:
 		++comparisons_num;
 		return value_ < r.value_;
 	}
+	
+		bool operator>(const OperationsCounterWrapper<T>& r) {
+		++comparisons_num;
+		return value_ > r.value_;
+	}
+
+	bool operator<=(const OperationsCounterWrapper<T>& r) {
+		++comparisons_num;
+		return value_ <= r.value_;
+	}
+
+	bool operator>=(const OperationsCounterWrapper<T>& r) {
+		++comparisons_num;
+		return value_ >= r.value_;
+	}
 
 	OperationsCounterWrapper<T>& operator=(const T& val) {
 		++assignments_num;
