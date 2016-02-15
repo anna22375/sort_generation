@@ -29,7 +29,7 @@ public:
 		return value_ < r.value_;
 	}
 	
-		bool operator>(const OperationsCounterWrapper<T>& r) {
+	bool operator>(const OperationsCounterWrapper<T>& r) {
 		++comparisons_num;
 		return value_ > r.value_;
 	}
