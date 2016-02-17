@@ -71,7 +71,54 @@ void alternation_generate(std::vector<T> &arr, size_t len, T min_val, T max_val)
 
 // Генерация последовательности (смесь регулярных участков)
 template<typename T>
-void mixture_generate(std::vector<T> &arr, size_t len, T min_val, T max_val) {
-}
+void mixture_generate(std::vector<T> &arr, int len, int min_val, int max_val)
+{
+	arr.clear();    
+	arr.resize(len + 1);
+	int borders_controller = 0, num,corr;
+	int number_of_sub_arrays = len / 10;
+	number_of_sub_arrays = rand() % (number_of_sub_arrays - 2 + 1) + 2;
+	num = len / number_of_sub_arrays;
+	corr = (abs(min_val) + abs(max_val)) / (num+1);
+	int *sub_array = new int[number_of_sub_arrays];
+	for (int i = 0; i < num; i++)
+	{
+
+		if (i == 0)
+		{
+			for (int j = 0; j < number_of_sub_arrays; j++)
+			{
+				sub_array[j] = rand() % (corr*(i+1) + 1) + min_val;
+				arr[j] = sub_array[j];
+			}
+		}
+		else
+		{
+			for (int j = 0; j < number_of_sub_arrays; j++)
+			{
+				int q = 0;
+				do
+				{
+					if (q == 1) { borders_controller = sub_array[j] - max_val; }
+						sub_array[j] = rand() % (corr*2 + 1)  +  arr[j + (i - 1)*number_of_sub_arrays];
+					q++;
+				} while (sub_array[j] > max_val);
+				arr[j + i*number_of_sub_arrays] = sub_array[j];
+			}
+		}
+		
+	}
+	for (int j = 0; j <= len - num*number_of_sub_arrays; j++)
+	{
+		int q = 0;
+		do
+		{
+			if (q == 1) { borders_controller = sub_array[j] - max_val; }
+				sub_array[j] = rand() % (max_val - arr[j + (num - 1)*number_of_sub_arrays] + 1) + arr[j + (num - 1)*number_of_sub_arrays];
+			q++;
+			} while (sub_array[j] > max_val);
+			arr[j + num*number_of_sub_arrays] = sub_array[j];
+		}
+	}
 
 
