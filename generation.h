@@ -48,7 +48,9 @@ template<typename T>
 void alternation_generate(std::vector<T> &arr, size_t len, T min_val, T max_val) {
         arr.clear();
 	arr.resize(len+1);
-	size_t the_number_of_parts = 1 + rand() % (len / 10);
+	size_t k = 1;
+	if (len >= 10) k = len / 10;
+	size_t the_number_of_parts = 1 + rand() % (k);
 	size_t amount_of_numbers = len;
 	for (size_t i = 1; i <= len; i++)
 	{ 
