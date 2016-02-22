@@ -21,6 +21,16 @@ void generate(std::vector<T> &arr, size_t len, T min_val, T max_val, int repetit
 template<typename T>
 void shuffle(std::vector<T> &arr, int order_percent) {
 	std::random_shuffle (arr.begin(), arr.end());
+	
+	int a; // это два рандомных элемента массива 
+	int b; // которые меням местами
+	for (int i = 0; i < order_percent; i++) {
+		a = rand() % n;
+		b = rand() % n;
+		tmp = arr[a];
+		arr[a] = arr[b];
+		arr[b] = tmp;	
+	}
 }
 
 // Генерация случайной последовательности
