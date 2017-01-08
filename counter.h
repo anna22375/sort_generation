@@ -67,50 +67,42 @@ private:
 };
 
 template<typename T>
-auto operator+(const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r)
-	-> decltype(std::declval<T>() + std::declval<T>()) {
+auto operator+(const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r) {
 	return l.value() + r.value();
 }
 
 template<typename T, typename U>
-auto operator+(const OperationsCounterWrapper<T>& l, const U& r)
-	-> decltype(std::declval<T>() + std::declval<U>()) {
+auto operator+(const OperationsCounterWrapper<T>& l, const U& r) {
 	return l.value() + r;
 }
 
 template<typename T, typename U>
-auto operator+(const U& l, const OperationsCounterWrapper<T>& r)
-	-> decltype(std::declval<U>() + std::declval<T>()) {
+auto operator+(const U& l, const OperationsCounterWrapper<T>& r) {
 	return l + r.value();
 }
 
 template<typename T>
-auto operator-(const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r)
-	-> decltype(std::declval<T>() - std::declval<T>()) {
+auto operator-(const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r) {
 	return l.value() - r.value();
 }
 
 template<typename T, typename U>
-auto operator-(const OperationsCounterWrapper<T>& l, const U& r)
-	-> decltype(std::declval<T>() + std::declval<U>()) {
+auto operator-(const OperationsCounterWrapper<T>& l, const U& r) {
 	return l.value() - r;
 }
 
 template<typename T, typename U>
-auto operator-(const U& l, const OperationsCounterWrapper<T>& r) 
-	-> decltype(std::declval<U>() + std::declval<T>()) {
+auto operator-(const U& l, const OperationsCounterWrapper<T>& r) {
 	return l - r.value();
 }
 
 template<typename T, typename U>
-auto operator*(const OperationsCounterWrapper<T>& l, const U& r)
-	-> decltype(std::declval<T>() * std::declval<U>()) {
+auto operator*(const OperationsCounterWrapper<T>& l, const U& r) {
 	return l.value() * r;
 }
 
 template<typename T, typename U>
-auto operator/(const OperationsCounterWrapper<T>& l, const U& r)
-	-> decltype(std::declval<T>() / r) {
+auto operator/(const OperationsCounterWrapper<T>& l, const U& r) {
 	return l.value() / r;
 }
 
