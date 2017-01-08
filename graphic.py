@@ -19,10 +19,6 @@ for i in x:
     y_time.append(np.mean(times))
     y_operation.append(np.mean(operations))
 
-
-print y_time
-print y_operation
-
 plt.title('Sort')
 
 plt.subplot(2, 1, 1, aspect='equal')
