@@ -2,6 +2,7 @@
 #include "counter.h"
 #include "sort.h"
 #include <ctime>
+#include <cmath>
 #include <vector>
 #include <chrono>
 #include <iostream>
@@ -64,7 +65,7 @@ int main(int argc, char **argv) {
 	OperationsCounterWrapper<value_t>::reset();
 	sort(wrap_arr);
 
-    std::cout << " " << OperationsCounterWrapper<value_t>::assignments_num;
-    std::cout << " " << OperationsCounterWrapper<value_t>::comparisons_num;
+    std::cout << " " << OperationsCounterWrapper<value_t>::assignments_num / (len * log2(len));
+    std::cout << " " << OperationsCounterWrapper<value_t>::comparisons_num / (len * log2(len));
     std::cout << std::endl;
 }

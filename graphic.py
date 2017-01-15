@@ -14,7 +14,7 @@ for i in x:
     for line in f:
         data = line.split()
         times.append(int(data[0]))
-        operations.append(int(data[1]) + int(data[2]))
+        operations.append(float(data[1]) + float(data[2]))
     
     y_time.append(np.mean(times))
     y_operation.append(np.mean(operations))
@@ -26,7 +26,7 @@ plt.plot(x, y_time, 'b.-')
 plt.xlabel('len')
 plt.ylabel('time')
 
-plt.subplot(2, 1, 2, aspect='equal')
+plt.subplot(2, 1, 2)
 plt.plot(x, y_operation, 'r.-')
 plt.xlabel('len')
 plt.ylabel('operations')
