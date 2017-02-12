@@ -51,21 +51,21 @@ int main(int argc, char **argv) {
         alternation_generate(arr, len);
     }
 
+    std::vector<OperationsCounterWrapper<value_t>> wrap_arr(len);
+    for(int i = 0; i < len; ++i) wrap_arr[i] = arr[i];
+
     // sort time measurement
-	auto start_time = std::chrono::steady_clock::now();
-	sort(arr);
-	auto end_time = std::chrono::steady_clock::now();
+    auto start_time = std::chrono::steady_clock::now();
+    sort(arr);
+    auto end_time = std::chrono::steady_clock::now();
 
     std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
 
     // operations measurement
-    std::vector<OperationsCounterWrapper<value_t>> wrap_arr(len);
-    for(int i = 0; i < len; ++i) wrap_arr[i] = arr[i];
+    OperationsCounterWrapper<value_t>::reset();
+    sort(wrap_arr);
 
-	OperationsCounterWrapper<value_t>::reset();
-	sort(wrap_arr);
-
-    std::cout << " " << OperationsCounterWrapper<value_t>::assignments_num / (len * log2(len));
-    std::cout << " " << OperationsCounterWrapper<value_t>::comparisons_num / (len * log2(len));
+    std::cout << " " << (OperationsCounterWrapper<value_t>::comparisons_num
+                            + OperationsCounterWrapper<value_t>::assignments_num) / (len * log2(len));
     std::cout << std::endl;
 }

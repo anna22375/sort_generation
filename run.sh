@@ -1,13 +1,19 @@
 #!/bin/bash
-g++ -std=c++14 main.cpp -o sorting
+rm -r results
+mkdir results
+
+g++ -std=c++11 main.cpp -o sorting
+
 for i in 100 1000 10000 20000
 do
-    rm "$i.txt"
+    fname=`date +%s%3N`
+    echo "$i " >> "results/$fname.txt"
     for j in `seq 1 10`
     do
        #sleep 1
-       ./sorting $i random $i 100 >> "$i.txt"
+       ./sorting $i random $i 100 >> "results/$fname.txt"
     done
 done
-python graphic.py
+
+python graphic.py results
 

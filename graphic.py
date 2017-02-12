@@ -1,20 +1,27 @@
+import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = [100, 1000, 10000, 20000]
+x = []
 y_time = []
 y_operation = []
 
-for i in x:
+directory = sys.argv[1]
+
+for fname in sorted(os.listdir(sys.argv[1])):
     times = []
     operations = []
 
-    f = open(str(i) + '.txt', 'r')
+    print fname
 
-    for line in f:
+    f = open(os.path.join(directory, fname), 'r')
+    x.append(int(f.readline())) #len
+
+    for line in f.readlines():
         data = line.split()
-        times.append(int(data[0]))
-        operations.append(float(data[1]) + float(data[2]))
+        times.append(int(data[0])) #time
+        operations.append(float(data[1])) #operations
     
     y_time.append(np.mean(times))
     y_operation.append(np.mean(operations))
