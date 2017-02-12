@@ -6,12 +6,11 @@ x = []
 y_time = []
 y_operation = []
 
-directory = sys.argv[1]
-
 def mean(numbers):
     return float(sum(numbers)) / max(len(numbers), 1)
 
-for fname in sorted(os.listdir(sys.argv[1])):
+directory = sys.argv[1]
+for fname in sorted(os.listdir(directory)):
     times = []
     operations = []
 
