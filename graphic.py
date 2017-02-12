@@ -1,6 +1,5 @@
 import os
 import sys
-import numpy as np
 import matplotlib.pyplot as plt
 
 x = []
@@ -8,6 +7,9 @@ y_time = []
 y_operation = []
 
 directory = sys.argv[1]
+
+def mean(numbers):
+    return float(sum(numbers)) / max(len(numbers), 1)
 
 for fname in sorted(os.listdir(sys.argv[1])):
     times = []
@@ -22,9 +24,11 @@ for fname in sorted(os.listdir(sys.argv[1])):
         data = line.split()
         times.append(int(data[0])) #time
         operations.append(float(data[1])) #operations
-    
-    y_time.append(np.mean(times))
-    y_operation.append(np.mean(operations))
+
+    f.close()
+
+    y_time.append(mean(times))
+    y_operation.append(mean(operations))
 
 plt.title('Sort')
 
