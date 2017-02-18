@@ -7,15 +7,15 @@
 using namespace std;
 
 template<typename T>
-void sift(vector<T> &a, int k, int m);
+void sift(vector<T> &a, int k, int m);    //просеивание элемента
 template<typename T>
-void hsort(vector<T> &a, int n, int l, int r);
+void hsort(vector<T> &a, int n, int l, int r);   //пирамидальная сортировка
 template<typename T>
-int average(vector<T> &a, int l, int r);
+int average(vector<T> &a, int l, int r);  //упорядочивание элементов относительного опроного
 template<typename T>
-void qsort(vector<T> &a, int l, int r, int depth);
+void qsort(vector<T> &a, int l, int r, int depth);   //быстрая сортировка
 template<typename T>
-T med(T a, T b, T c);
+T med(T a, T b, T c);   //нахождение среднего элемента из трех
 
 
 template<typename T>
