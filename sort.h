@@ -76,7 +76,7 @@ T med(T a, T b, T c)
 template<typename T>
 int average(vector<T> &a, int l, int r)
 {
-    int i, j, tmp;
+    int i, j;
     T x = med(a[l+1], a[r-1], a[l+(r-l)/2]);
     j = r+1;
     i = l-1;
