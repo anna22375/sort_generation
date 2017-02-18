@@ -1,3 +1,5 @@
+/* я сделала introsort, потому что qsort не такой интересный*/
+
 #include <vector>
 #include <algorithm>
 #include <cmath>
