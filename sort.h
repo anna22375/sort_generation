@@ -15,4 +15,7 @@ void makeHeap(std::vector<T> &arr, int x1, int x2);
 
 template<typename T>
 void heapsort(std::vector<T> &arr, int x1, int x2);
+
+template<typename T>
+T Mediana(T a, T b, T c);
 #endif

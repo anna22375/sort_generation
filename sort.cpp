@@ -8,6 +8,7 @@ void sort(std::vector<T> &arr) {
   introsort(arr);
 }
 
+
 template<typename T>
 void introsort(std::vector<T> &arr) {
   const int maxdepth = log(arr.size());
@@ -23,7 +24,7 @@ void introsort1(std::vector<T> &arr, int x1, int x2, int maxdepth) {
     if (maxdepth == 0)
       heapsort(arr, x1, x2);
     else {
-      T p = arr[(x2+x1)/2];
+      T p = Mediana(arr[x1+1],arr[x2-1],arr[x1+(x2-x1)/2]);
       int xl = x1, xr = x2;
 
       while (xl <= xr)
@@ -77,4 +78,17 @@ void heapsort(std::vector<T> &arr,int x1,int x2) {
     n--;
     siftDown(arr,x1,n);
   }
+}
+
+//Медиана из трёх
+template<typename T>
+T Mediana(T a, T b, T c) {
+  if (a > b) {
+    if (c > a)
+      return a;
+    return (b > c) ? b : c;
+  }
+  if (c > b)
+    return b;
+  return (a > c) ? a : c;
 }
