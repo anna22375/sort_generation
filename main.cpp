@@ -1,6 +1,7 @@
 #include "generation.h"
 #include "counter.h"
 #include "sort.h"
+#include "sort.cpp"
 #include <ctime>
 #include <cmath>
 #include <vector>
