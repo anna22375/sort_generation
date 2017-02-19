@@ -104,3 +104,4 @@ void qsort(vector<T> &a, int l, int r, int depth)
         qsort(a, t+1, r, depth-1);
     }
 }
+//просто экспериментирую с гитом
