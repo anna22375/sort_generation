@@ -2,7 +2,7 @@
 #include <algorithm>
 
 template <class T>
-void sort(std::vector<T> &array, const int le, const int ri)
+void sort(std :: vector<T> &array, const int le, const int ri)
 {
         if (le >= ri) return;
         int j = partition(array, le, ri);
@@ -11,23 +11,39 @@ void sort(std::vector<T> &array, const int le, const int ri)
 }
 
 template <class T>
-void sort(std::vector<T> &array)
+void sort(std :: vector<T> &array)
 {
-        static int le = 0;
-        static int ri = array.size()-1;
-        if (le >= ri) return;
-        int j = partition(array, le, ri);
-        sort(array, le, j - 1);
-        sort(array, j + 1, ri);
+        sort(array, 0, array.size() - 1);
 }
 
+int median(const int a, const int b, const int c)
+{
+        if (a < b) {
+                if (b < c)
+                        return b;
+                else if (a < c) //a < b, b >= c
+                        return c;
+                else return a; //a < b, b >=c, a >= c
+        }
+        else //a >= b
+        {
+                if (a < c)
+                        return a;
+                else if (b < c) //a >= b, a >= c, b < c
+                        return c;
+                else return b; // a >= b, a >= c, b >= c
+        }
+}
 
 template <class T>
-int partition(std::vector<T> &array, const int le, const int ri)
+int partition(std :: vector<T> &array, const int le, const int ri)
 {
-        
+
+        int reference = median(le + 1, le + (ri - le) / 2, ri - 1);
         int i = le + 1;
         int j = ri;
+        swap(array[le], array[reference]);
+
         while (i <= j)
         {
                 if (array[i] < array[le]) i++;
