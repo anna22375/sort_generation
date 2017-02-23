@@ -1,11 +1,13 @@
-#include "generation.h"
 #include "counter.h"
+#include "generation.h"
 #include "sort.h"
-#include <ctime>
-#include <cmath>
-#include <vector>
+
+#include <algorithm>
 #include <chrono>
+#include <cmath>
+#include <ctime>
 #include <iostream>
+#include <vector>
 
 int main(int argc, char **argv) {
 
@@ -59,6 +61,11 @@ int main(int argc, char **argv) {
     sort(arr);
     auto end_time = std::chrono::steady_clock::now();
 
+    if(!std::is_sorted(arr.begin(), arr.end())) {
+        std::cout << "Error! Array is not sorted" << std::endl;
+        return 1;
+    }
+
     std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
 
     // operations measurement
@@ -67,5 +74,12 @@ int main(int argc, char **argv) {
 
     std::cout << " " << (OperationsCounterWrapper<value_t>::comparisons_num
                             + OperationsCounterWrapper<value_t>::assignments_num) / (len * log2(len));
+
     std::cout << std::endl;
+
+    if(!std::is_sorted(wrap_arr.begin(), wrap_arr.end())) {
+        std::cout << "Error! Wrapped array is not sorted" << std::endl;
+        return 1;
+    }
+    return 0;
 }
