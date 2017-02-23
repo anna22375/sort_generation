@@ -66,7 +66,7 @@ void buildMaxHeap(vector<T> &tree, int &currentSize)
 }
 ////////////////////////////////////////////////
 template <typename T>
-void heapsort(vector<T> &tree)
+void sort(vector<T> &tree)
 {
 	int currentSize=0;
 	buildMaxHeap(tree,currentSize);
