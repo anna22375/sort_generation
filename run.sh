@@ -7,6 +7,7 @@ g++ -std=c++11 main.cpp -o sorting
 for i in 100 1000 10000 20000
 do
     fname=`date +%s%3N`
+	sleep 1
     echo "$i " >> "results/$fname.txt"
     for j in `seq 1 10`
     do
