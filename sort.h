@@ -1,7 +1,6 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#include "generation.h"
 
 template<typename T>
 void heapSort(std::vector<T> &arr, int a, int b);
@@ -10,17 +9,13 @@ template<typename T>
 int partition(std::vector<T> &arr, int l, int r);
 
 template <typename T>
-void swap(std::vector<T> &arr, int a, int b);
-
-template <typename T>
 void heapify(std::vector<T> &vector, int a, int b, int i);
 
-int maxDepth;
 
 template<typename T>
 void quickSort(std::vector<T> &arr, int l, int r, int depth) {
-    depth++;
-    if (depth == maxDepth) {
+    depth--;
+    if (depth == 0) {
         heapSort(arr, l, r);
     } else {
         if (l < r) {
@@ -33,8 +28,20 @@ void quickSort(std::vector<T> &arr, int l, int r, int depth) {
 
 template<typename T>
 void sort(std::vector<T> &arr) {
-    maxDepth = (int) log2(arr.size());
-    quickSort(arr, 0, (int) (arr.size() - 1), 0);
+    int maxDepth = (int) log2(arr.size());
+    quickSort(arr, 0, (int) (arr.size() - 1), maxDepth);
+}
+
+template<typename T>
+void medToTheEnd(std::vector<T> &arr, int l, int r) {
+    std::vector<T> temp;
+    temp[0] = arr[l];
+    temp[1] = arr[(r - l)/2];
+    temp[2] = arr[r];
+    heapSort(temp, 0, 2);
+    arr[l] = temp[0];
+    arr[(r - l)/2] = temp[2];
+    arr[r] = temp[1];
 }
 
 template<typename T>
@@ -46,7 +53,7 @@ int partition(std::vector<T> &arr, int l, int r) {
             b++;
         } else {
             a++;
-            swap(arr, a, b);
+            std::swap(arr[a], arr[b]);
             b++;
         }
     }
@@ -67,7 +74,7 @@ void heapSort(std::vector<T> &arr, int a, int b) {
 
 
         for (int i = b; i > a; i--) {
-            swap(arr, i, a);
+            std::swap(arr[i], arr[a]);
             heapify(arr, a, i - 1, a);
         }
     }
@@ -90,17 +97,9 @@ void heapify(std::vector<T> &arr, int a, int b, int i) {
     // If largest is not root
     if (largest != i)
     {
-        swap(arr, i, largest);
+        std::swap(arr[i], arr[largest]);
 
         // Recursively heapify the affected sub-tree
         heapify(arr, a, b, largest);
     }
-}
-
-
-template <typename T>
-void swap(std::vector<T> &arr, int a, int b) {
-    int q = arr[a];
-    arr[a] = arr[b];
-    arr[b] = q;
 }
