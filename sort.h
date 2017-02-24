@@ -21,7 +21,7 @@ int median(std::vector<T> &array, const int le, const int ri)
 }
 
 template <class T>
-int partition(std::vector<T> &array, le, ri)
+int partition(std::vector<T> &array, const int le, const int ri)
 {
 
         int reference = median(le + 1, le + (ri - le) / 2, ri - 1);
