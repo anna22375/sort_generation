@@ -1,8 +1,27 @@
 #include <vector>
 #include <algorithm>
 
+int median(std::vector<T> &array, const int le, const int ri)
+{
+        if (array[le + 1] < array[le + (ri - le) / 2]) {
+                if (array[le + (ri - le) / 2] < array[ri - 1])
+                        return le + (ri - le) / 2;
+                else if (array[le + 1] < array[ri - 1]) //a < b, b >= c
+                        return ri - 1;
+                else return le + 1; //a < b, b >=c, a >= c
+        }
+        else //a >= b
+        {
+                if (array[le + 1] < array[ri - 1])
+                        return le + 1;
+                else if (array[le + (ri - le) / 2] < array[ri - 1]) //a >= b, a >= c, b < c
+                        return ri - 1;
+                else return le + (ri - le) / 2; // a >= b, a >= c, b >= c
+        }
+}
+
 template <class T>
-int partition(std::vector<T> &array, const int le, const int ri)
+int partition(std::vector<T> &array, le, ri)
 {
 
         int reference = median(le + 1, le + (ri - le) / 2, ri - 1);
@@ -37,23 +56,4 @@ template <class T>
 void sort(std::vector<T> &array)
 {
         sort(array, 0, array.size() - 1);
-}
-
-int median(const int a, const int b, const int c)
-{
-        if (a < b) {
-                if (b < c)
-                        return b;
-                else if (a < c) //a < b, b >= c
-                        return c;
-                else return a; //a < b, b >=c, a >= c
-        }
-        else //a >= b
-        {
-                if (a < c)
-                        return a;
-                else if (b < c) //a >= b, a >= c, b < c
-                        return c;
-                else return b; // a >= b, a >= c, b >= c
-        }
 }
