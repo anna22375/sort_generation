@@ -1,6 +1,3 @@
-#ifndef GENERATION_H
-#define GENERATION_H
-
 #include <vector>
 #include <cstdlib>
 #include <algorithm>
@@ -59,5 +56,4 @@ void alternation_generate(std::vector<T> &arr, int len) {
 	std::sort(arr.begin() + start, arr.end());
 }
 
-#endif // GENERATION_H
 

@@ -1,6 +1,3 @@
-#ifndef SORT_H
-#define SORT_H
-
 #include <vector>
 #include <algorithm>
 
@@ -33,7 +30,6 @@ template <typename T> void heap_make(std::vector<T> &arr, int n) //реализ�
         heapify <T>(arr,i, n);
     }
 }
-<<<<<<< HEAD
 template <typename T> void heap_sort(std::vector<T> &arr) // получение из кучи массива // сама сортировка
 {
     int n = arr.size();
@@ -45,7 +41,3 @@ template <typename T> void heap_sort(std::vector<T> &arr) // получение 
         heapify <T>(arr,0,n);
     }
 }
-=======
-
-#endif // SORT_H
->>>>>>> ea82d794067225d3daea7ff64c2d116e2f767bd3

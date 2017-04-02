@@ -1,5 +1,5 @@
-#ifndef COUNTER_H
-#define COUNTER_H
+#ifndef OP_COUNTER_H
+#define OP_COUNTER_H
 
 // http://www.cs.rpi.edu/~musser/gp/code/counter.h.txt
 
@@ -69,5 +69,5 @@ op_num_t OperationsCounterWrapper<T>::assignments_num = 0;
 template <typename T>
 op_num_t OperationsCounterWrapper<T>::comparisons_num = 0;
 
-#endif // COUNTER_H
+#endif
 
