@@ -14,7 +14,7 @@ for fname in sorted(os.listdir(directory)):
     times = []
     operations = []
 
-    print fname
+    print (fname)
 
     f = open(os.path.join(directory, fname), 'r')
     x.append(int(f.readline())) #len

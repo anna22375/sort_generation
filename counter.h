@@ -41,8 +41,8 @@ private:
 
 template<typename T>
 bool operator< (const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r) {
-    OperationsCounterWrapper<T>::comparisons_num++;
-    return l.value() < r.value();
+	OperationsCounterWrapper<T>::comparisons_num++;
+	return l.value() < r.value();
 }
 
 template<typename T>
@@ -56,8 +56,8 @@ bool operator>=(const OperationsCounterWrapper<T>& l, const OperationsCounterWra
 
 template<typename T>
 bool operator==(const OperationsCounterWrapper<T>& l, const OperationsCounterWrapper<T>& r) {
-    OperationsCounterWrapper<T>::comparisons_num++;
-    return l.value() == r.value();
+	OperationsCounterWrapper<T>::comparisons_num++;
+	return l.value() == r.value();
 }
 
 template<typename T>

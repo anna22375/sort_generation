@@ -58,11 +58,14 @@ int main(int argc, char **argv) {
 
     // sort time measurement
     auto start_time = std::chrono::steady_clock::now();
-    sort(arr);
+    heap_sort(arr);
     auto end_time = std::chrono::steady_clock::now();
 
     if(!std::is_sorted(arr.begin(), arr.end())) {
         std::cout << "Error! Array is not sorted" << std::endl;
+        for (int i = arr.size(); i > 0; i--) {
+        	std::cout << arr[i] << std::endl;
+        }
         return 1;
     }
 
@@ -70,7 +73,7 @@ int main(int argc, char **argv) {
 
     // operations measurement
     OperationsCounterWrapper<value_t>::reset();
-    sort(wrap_arr);
+    heap_sort(wrap_arr);
 
     std::cout << " " << (OperationsCounterWrapper<value_t>::comparisons_num
                             + OperationsCounterWrapper<value_t>::assignments_num) / (len * log2(len));
