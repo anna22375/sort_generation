@@ -1,106 +1,43 @@
-/* СЏ СЃРґРµР»Р°Р»Р° introsort, РїРѕС‚РѕРјСѓ С‡С‚Рѕ qsort РЅРµ С‚Р°РєРѕР№ РёРЅС‚РµСЂРµСЃРЅС‹Р№*/
 
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
-template<typename T>
-void sift(vector<T> &a, int k, int m);    //РїСЂРѕСЃРµРёРІР°РЅРёРµ СЌР»РµРјРµРЅС‚Р°
-template<typename T>
-void hsort(vector<T> &a, int n, int l, int r);   //РїРёСЂР°РјРёРґР°Р»СЊРЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
-template<typename T>
-int average(vector<T> &a, int l, int r);  //СѓРїРѕСЂСЏРґРѕС‡РёРІР°РЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕРіРѕ РѕРїСЂРѕРЅРѕРіРѕ
-template<typename T>
-void qsort(vector<T> &a, int l, int r, int depth);   //Р±С‹СЃС‚СЂР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
-template<typename T>
-T med(T a, T b, T c);   //РЅР°С…РѕР¶РґРµРЅРёРµ СЃСЂРµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РёР· С‚СЂРµС…
-
-
-template<typename T>
-void sort(vector<T> &arr)
-{
-    int n = arr.size();
-    int depth = int (log(n));
-    qsort(arr, 0, n-1, depth);
+template <typename T>
+void mergesort(vector<T> &arr, int left, int right){										//left - левая граница исходного массива
+	if (right - left > 0){																	//right - правая граница исходного массива
+		int delimiter = (right + left) / 2;													//delimiter - медиана массива
+		mergesort(arr, left, delimiter);													//разбиение на два меньших подмассива; итерирует до тех пор, пока размер подмассивов > 1
+		mergesort(arr, delimiter + 1, right);
+		if (right - left == 1){								//если всего два э-та, то сравниваются "номиналы" и при необходимости меняются местами
+			if (arr[left] > arr[right]) swap(arr[left], arr[right]);
+			return;
+		}
+		vector<T> helparr(&arr[left], &arr[right] + 1);
+		for (int idx = left, lidx = 0, ridx = delimiter - left + 1; idx <= right; ++idx){	//idx - счетчик текущего э-та строящегося массива
+			if (lidx > delimiter - left){													//lidx - счетчик пробега по "левому" массиву из двух
+				arr[idx] = helparr[ridx++];													//ridx - счетчик пробега по "правому" массиву из двух
+			}
+			else{																			//если кончился левый или правый подмассив, то остаток другого подмассива прикрепляется к итоговому массиву
+				if (ridx > right - left){
+					arr[idx] = helparr[lidx++];
+				}
+				else{
+					if (helparr[ridx] < helparr[lidx]){										//добаление в массив очередного меньшего э-та
+						arr[idx] = helparr[ridx++];
+					}
+					else arr[idx] = helparr[lidx++]; 
+				}
+			}
+		}
+	}
+	else return;
 }
 
-template<typename T>
-void sift(vector<T> &a, int k, int m)
-{
-    T new_el = a[k];
-    int child;
-
-    while (k < (m+1)/2)
-    {
-        child = 2*k+1;
-        if (child < m && a[child] < a[child+1])
-            child++;
-        if (new_el >= a[child])
-            break;
-        a[k] = a[child];
-        k = child;
-    }
-
-    a[k] = new_el;
-}
-
-template<typename T>
-void hsort(vector<T> &a, int n, int l, int r)
-{
-    for (int i = l + n/2; i>=l; i--)
-        sift(a, i, n-1);
-
-    for(int i = r; i > l; i--)
-    {
-        swap(a[i], a[l]);
-        sift(a, l, i-1);
-    }
-}
-
-template<typename T>
-T med(T a, T b, T c)
-{
-    if (a>b)
-    {
-        if (c>a) return a;
-        if (b>c) return b;
-        else return c;
-    }
-    if (c>b) return b;
-    if (a>c) return a;
-    else return c;
-}
-
-template<typename T>
-int average(vector<T> &a, int l, int r)
-{
-    int i, j;
-    T x = med(a[l+1], a[r-1], a[l+(r-l)/2]);
-    j = r+1;
-    i = l-1;
-    while (1)
-    {
-      while (a[--j] > x);
-      while (a[++i] < x);
-      if (i < j)
-         swap (a[i], a[j]);
-      else
-         return j;
-   }
-}
-
-template<typename T>
-void qsort(vector<T> &a, int l, int r, int depth)
-{
-    if (depth == 0)
-        hsort(a, r-l+1, l, r);
-    int t;
-    if (l<r)
-    {
-        t = average(a, l, r);
-        qsort(a, l, t, depth-1);
-        qsort(a, t+1, r, depth-1);
-    }
+template <typename T>
+void sort(vector<T> &arr){
+	mergesort(arr, 0, (int)(arr.size() - 1));
 }
