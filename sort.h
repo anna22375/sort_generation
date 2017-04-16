@@ -8,7 +8,8 @@ void swap(int* a, int* b)
 	*b = t;
 }
 
-int partition(int arr[], int l, int r, int& swapping)
+template<typename T>
+int partition(std::vector<T> &arr, int l, int r, int& swapping)
 {
 	int pivot = arr[r];
 	int i = (l - 1);  // Index of smaller element
@@ -28,7 +29,8 @@ int partition(int arr[], int l, int r, int& swapping)
 	return (i + 1);//return the meaning of pivot
 }
 
-void quickSort(int arr[], int l, int r, int& swapping)
+template<typename T>
+void quickSort(std::vector<T> &arr, int l, int r, int& swapping)
 {
 
 	if (l < r)
