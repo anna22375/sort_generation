@@ -9,18 +9,17 @@ void swap(T &a, T &b) {
 }
 
 template <typename T>
-void quicksort(std::vector<T> &arr, int l, int r) {
-    int p = l-1;
+void quicksort(std::vector<T> &arr, size_t l, size_t r) {
+    size_t p = l;
     if (l < r) {
         T pivot = arr[r];
         for (int i = l; i < r; i++)
             if (arr[i] <= pivot) {
-                p++;
                 swap(arr[p], arr[i]);
+                p++;
             }
-        p++;
         swap(arr[p], arr[r]);
-        quicksort(arr, l, p-1);
+        if (p > 0) quicksort(arr, l, p-1);
         quicksort(arr, p+1, r);
     }
 }
